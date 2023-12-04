@@ -9,9 +9,9 @@ export default {
   name: "app",
   components: {},
   beforeCreate() {
-    this.$store.commit("setMiniInterface", window.innerWidth < 750);
+    this.$store.commit("setMiniInterface", window.innerWidth < 2000);
     window.onresize = () => {
-      this.$store.commit("setMiniInterface", window.innerWidth < 750);
+      this.$store.commit("setMiniInterface", window.innerWidth < 2000);
     };
   },
 };

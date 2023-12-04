@@ -88,7 +88,7 @@
       <div class="content">
         <div class="top-bar" ref="top"></div>
         <div v-for="data in chapterData" :key="data.index" ref="chapter">
-          <div class="title" ref="title" :index="data.index" v-if="show">
+          <div :class="['title']" :style="titleStyle" ref="title" :index="data.index" v-if="show">
             {{ data.title }}
           </div>
           <Pcontent :carray="data.content" />
@@ -117,6 +117,10 @@ export default {
   created() {
     var config = JSON.parse(localStorage.getItem("config"));
     if (config != null) this.$store.commit("setConfig", config);
+    const { fontFamily, fontSize } = this;
+    let style = fontFamily;
+    style.fontSize = fontSize;
+    this.titleStyle = style
   },
   beforeCreate() {
     let config = JSON.parse(localStorage.getItem("config"));
@@ -249,6 +253,7 @@ export default {
       chapterData: [],
       scrollObserve: null,
       readingObserve: null,
+      titleStyle: null,
     };
   },
   computed: {
@@ -366,6 +371,15 @@ export default {
     enableInfiniteLoading() {
       return this.$store.state.config.infiniteLoading;
     },
+    fontFamily() {
+      if (this.$store.state.config.font >= 0) {
+        return config.fonts[this.$store.state.config.font];
+      }
+      return { fontFamily: this.$store.state.config.customFontName };
+    },
+    fontSize() {
+      return Number(this.$store.state.config.fontSize) + 10 + "px";
+    }
   },
   methods: {
     getCatalog(bookUrl) {
@@ -545,28 +559,28 @@ export default {
           event.preventDefault();
           this.toNextChapter();
           break;
-        case "ArrowUp":
-          event.stopPropagation();
-          event.preventDefault();
-          if (document.documentElement.scrollTop === 0) {
-            this.$message.warning("已到达页面顶部");
-          } else {
-            jump(0 - document.documentElement.clientHeight + 100);
-          }
-          break;
-        case "ArrowDown":
-          event.stopPropagation();
-          event.preventDefault();
-          if (
-            document.documentElement.clientHeight +
-              document.documentElement.scrollTop ===
-            document.documentElement.scrollHeight
-          ) {
-            this.$message.warning("已到达页面底部");
-          } else {
-            jump(document.documentElement.clientHeight - 100);
-          }
-          break;
+        // case "ArrowUp":
+        //   event.stopPropagation();
+        //   event.preventDefault();
+        //   if (document.documentElement.scrollTop === 0) {
+        //     this.$message.warning("已到达页面顶部");
+        //   } else {
+        //     jump(0 - document.documentElement.clientHeight + 100);
+        //   }
+        //   break;
+        // case "ArrowDown":
+        //   event.stopPropagation();
+        //   event.preventDefault();
+        //   if (
+        //     document.documentElement.clientHeight +
+        //       document.documentElement.scrollTop ===
+        //     document.documentElement.scrollHeight
+        //   ) {
+        //     this.$message.warning("已到达页面底部");
+        //   } else {
+        //     jump(document.documentElement.clientHeight - 100);
+        //   }
+        //   break;
       }
     },
     //IntersectionObserver回调 底部加载
@@ -722,12 +736,12 @@ export default {
 
     .content {
       font-size: 18px;
-      line-height: 1.8;
+      line-height: 1.4;
       overflow: hidden;
       font-family: 'Microsoft YaHei', PingFangSC-Regular, HelveticaNeue-Light, 'Helvetica Neue Light', sans-serif;
 
       .title {
-        margin-bottom: 57px;
+        margin-bottom: 40px;
         font: 24px / 32px PingFangSC-Regular, HelveticaNeue-Light, 'Helvetica Neue Light', 'Microsoft YaHei', sans-serif;
       }
 
@@ -776,7 +790,7 @@ export default {
 
   >>> .chapter {
     border: 1px solid #444;
-    color: #666;
+    color: #999;
   }
 
   >>> .popper__arrow {
@@ -784,7 +798,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 2000px) {
   .chapter-wrapper {
     padding: 0;
 

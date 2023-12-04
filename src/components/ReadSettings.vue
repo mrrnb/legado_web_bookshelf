@@ -409,7 +409,7 @@ export default {
 
 .night {
   >>>.theme-item {
-    border: 1px solid #666;
+    border: 1px solid #999;
   }
 
   >>>.selected {

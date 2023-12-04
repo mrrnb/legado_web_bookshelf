@@ -53,16 +53,6 @@
           </div>
         </div>
       </div>
-      <div class="bottom-icons">
-        <a
-          href="https://github.com/gedoor/legado_web_bookshelf"
-          target="_blank"
-        >
-          <div class="bottom-icon">
-            <img :src="require('../assets/imgs/github.png')" alt="" />
-          </div>
-        </a>
-      </div>
     </div>
     <div class="shelf-wrapper" ref="shelfWrapper">
       <div class="books-wrapper">
@@ -508,7 +498,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 2000px) {
   .index-wrapper {
     overflow-x: hidden;
     flex-direction: column;

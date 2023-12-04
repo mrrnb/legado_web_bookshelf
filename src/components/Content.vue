@@ -78,6 +78,9 @@ p {
   display: block;
   word-wrap: break-word;
   word-break: break-all;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
   >>> img {
     height: 1em;
   }
