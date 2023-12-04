@@ -498,7 +498,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 2560px) {
   .index-wrapper {
     overflow-x: hidden;
     flex-direction: column;

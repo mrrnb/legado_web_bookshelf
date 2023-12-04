@@ -798,7 +798,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 2560px) {
   .chapter-wrapper {
     padding: 0;
 
